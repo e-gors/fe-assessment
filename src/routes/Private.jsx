@@ -1,12 +1,12 @@
 import React, { lazy, Suspense } from "react";
-import { Navigate } from "react-router-dom";
 import Loader from "../modules/layouts/Loader";
 import { isAuth } from "../utils/helpers";
+import { Navigate } from "react-router-dom";
 
 function Private({ component }) {
   const Component = lazy(() => import(`../${component}`));
 
-  if (!isAuth()) {
+  if (!isAuth) {
     return <Navigate to="/login" />;
   }
 
