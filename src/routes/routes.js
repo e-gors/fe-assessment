@@ -1,5 +1,5 @@
 const routes = [
-  { path: "/", component: "pages/Hompage", auth: true },
+  { path: "/", component: "pages/Homepage", auth: true },
   { path: "/login", component: "pages/Login" },
 ];
 

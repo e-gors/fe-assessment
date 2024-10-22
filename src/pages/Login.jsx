@@ -34,7 +34,7 @@ const userValidator = Validator({
 });
 
 function Login() {
-  const router = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const [loading, setLoading] = React.useState(false);
@@ -49,9 +49,9 @@ function Login() {
 
   React.useEffect(() => {
     if (!isEmpty(accessToken)) {
-      router.push("/dashboard");
+      navigate("/");
     }
-  }, [accessToken, router]);
+  }, [accessToken]);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -96,7 +96,7 @@ function Login() {
           localStorage.setItem("accessToken", JSON.stringify(res.data.token));
           dispatch(setUser(res.data.user));
           ToastNotification("success", res.data.message, options);
-          router.push("/dashboard");
+          navigate("/");
         } else {
           ToastNotification("error", res.data.message, options);
         }
