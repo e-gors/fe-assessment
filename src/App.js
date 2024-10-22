@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import routes from "./routes/routes";
+import Private from "./routes/Private";
+import Public from "./routes/Public";
+import NotFound from "./routes/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {routes.map((route, i) => {
+          if (route.auth) {
+            return (
+              <Route
+                key={i}
+                path={route.path}
+                element={<Private component={route.component} />}
+              />
+            );
+          } else {
+            return (
+              <Route
+                key={i}
+                path={route.path}
+                element={<Public component={route.component} />}
+              />
+            );
+          }
+        })}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
